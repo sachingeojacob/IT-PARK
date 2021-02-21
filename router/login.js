@@ -45,6 +45,7 @@ router.post('/login', async (req, res) => {
                 req.session.userid = usernameExists._id;
                 res.redirect('/admin/dashboard');
             } else {
+                req.session.userid = usernameExists._id;
                 res.redirect('/customer/dashboard');
             }
         } else {
