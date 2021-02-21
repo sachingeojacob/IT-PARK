@@ -6,14 +6,15 @@ require('dotenv').config();
 var ejs = require('ejs');
 var path = require('path')
 var parser = require('body-parser')
-//var session = require('expresss-session')
+var session = require('express-session')
 
 //Accesing routers
 
 const index = require('./router/index');
-const register = require('./router/register');
-/*const login = require('./router/login');
-const adminDashboard = require('./router/admin');*/
+const register = require('./router/login');
+//const login = require('./router/login');
+const adminDashboard = require('./router/admin');
+const customerDashboard = require('./router/customer');
 
 
 //setting directeries like ejs public
@@ -23,12 +24,12 @@ app.set('views', path.join(__dirname, 'views'))
 
 //config session
 
-/*app.use(session({
+app.use(session({
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: true,
 }));
-*/
+
 
 
 // This statement is used to connect databse
@@ -44,8 +45,9 @@ app.use(express.json());
 
 app.use('/', index);
 app.use('/', register)
-/*app.use('/', login);
-app.use('/admin', adminDashboard);*/
+//app.use('/', login);
+app.use('/admin', adminDashboard);
+app.use('/customer', customerDashboard);
 
 
 
