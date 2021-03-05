@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Add Product</title>
+        <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <style>
+            .sachin{
+                width: 90%;
+                height: 600px;
+                background: rgb(215, 215, 221);
+                padding: 2em;
+                margin-left: 5%;
+                color: rgb(110, 57, 57);
+                text-shadow:black
+                ;
+            }
+        </style>
+    </head>
+    <body>
+
+        <%- include('partials/navbar.ejs')  %>
+        
+
+        <!-- main content -->
+        <div class="sachin">
+            <h1 align="center" style="font-weight: bold;"> ADD PRODUCT</h1>
+            <form action="/admin/addproduct" method="post" class="col-md-10" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productname" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="productname" name="productname" placeholder="Name"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity"
+                        required>
+                        
+                </div>
+                <div class="mb-3">
+                    <label for="productimage" class="form-label">Upload</label>
+                    <input class="form-control" type="file" id="productimage" name="image" required>
+                </div>
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Add Product">
+                </div>
+            </form>
+
+
+
+
+
+
+
+
+
+        </div>
+        <!-- end of main content -->
+
+
+
+
+
+            <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    </body>
+</html>
