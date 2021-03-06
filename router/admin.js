@@ -2,7 +2,8 @@
 const router = require('express').Router(); // router handles each redirections.
 const multer = require('multer');
 const { Category } = require('../models/category');
-const{Product} = require('../models/product')
+const{ Product } = require('../models/product');
+const { Staff } = require('../models/staff');
 
 
 
@@ -35,7 +36,8 @@ router.get('/dashboard', async (req, res) => {
 
 //GET the addproduct page in the admin
 router.get('/addproduct', async (req, res) => {
-    res.render('./admin/addproduct'); // rendering index.ejs file
+    const category = await Category.find({})
+    res.render('./admin/addproduct', { category:category }); // rendering index.ejs file
 })
 
 //GET the viewproduct page in the admin
@@ -48,6 +50,10 @@ router.get('/category', async (req, res)=>{
     res.render('./admin/category')
 })
 
+//GET the category page in the admin
+router.get('/addstaff', async (req, res)=>{
+    res.render('./admin/addstaff')
+})
 
 
 
@@ -55,6 +61,49 @@ router.get('/category', async (req, res)=>{
 
 
 
+//post endpoint. saving staff data to database
+router.post('/addstaff', async (req, res) => {
+    // console.log(req.body.category);
+    // const stafExists = await Staff.findOne({email: req.body.email}); // finding whether the email exist or not.
+    // if(stafExists) {
+    //    return res.render('admin/dashboard', {error: "staff already exists!"});
+    // }
+    const staffdata = new Staff({    // adding data to Staff model objects
+        firstname: req.body.fname,
+        lastname: req.body.lname,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        gender: req.body.gender,
+        zipcode: req.body.zipcode,
+        district: req.body.district,
+        state: req.body.state,  
+    });
+    await staffdata.save(); // saving data to databse
+    res.render('admin/dashboard'); // after saving. rendering caregory page
+    //res.json( staffdata )
+})
+
+
+// POST endpoint. saving product data to database.
+router.post('/addproduct', uploadPhoto, async (req, res) => {
+    // if(!req.session.userid) {
+    //     return res.redirect('/login');
+    //}
+    const productdata = new Product({    // adding data to Login model objects
+        productname: req.body.productname,
+        brandname: req.body.brandname,
+        color: req.body.color,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        category: req.body.category,
+        image: req.file.filename,
+        description: req.body.description,
+        warrenty: req.body.warrenty
+    });
+    await productdata.save(); // saving data to databse
+    res.redirect('/admin/addproduct'); // after saving. redirecting add product page
+    //res.json( productdata )
+})
 
 
 
@@ -72,33 +121,6 @@ router.post('/category', async (req, res) => {
     res.render('admin/dashboard'); // after saving. rendering caregory page
     //res.json( userdata )
 })
-
-
-
-
-
-
-
-
-
-
-
-// POST endpoint. saving product data to database.
-router.post('/addproduct', uploadPhoto, async (req, res) => {
-    // if(!req.session.userid) {
-    //     return res.redirect('/login');
-    //}
-    const productdata = new Product({    // adding data to Login model objects
-        productname: req.body.productname,
-        price: req.body.price,
-        quantity: req.body.quantity,
-        image: req.file.filename
-    });
-    await productdata.save(); // saving data to databse
-    //res.redirect('/admin/addproduct'); // after saving. redirecting add product page
-    res.json( productdata )
-})
-
 
 
 

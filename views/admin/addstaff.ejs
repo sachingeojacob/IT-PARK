@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Add Product</title>
+        <title>Add Staff</title>
         <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -17,8 +17,12 @@
                 padding: 1em;
                 margin-left: 5%;
                 color: rgb(110, 57, 57);
-                text-shadow:black
-                ;
+                text-shadow:black;
+            }
+            .sac{
+                background: white;
+                height: 33px;
+                border-radius: 7px;
             }
         </style>
     </head>
@@ -29,18 +33,20 @@
 
         <!-- main content -->
         <div class="sachin">
-            <h1 align="center" style="font-weight: bold;"> ADD PRODUCT</h1>
-            <form action="/admin/addproduct" method="post" class="col-md-10" enctype="multipart/form-data">
-                <div class="row">
+            <h1 align="center" style="font-weight: bold;"> ADD NEW STAFF</h1>
+            <br>
+            <br>
+            <form action="/admin/addstaff" method="post" class="col-md-10">
+                <div class="row padd">
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productname" name="productname" placeholder="Name"
+                        <label for="productname" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="productname" name="fname" placeholder="Enter first Name"
                             required>
                     </div>
                     
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Brand</label>
-                        <input type="text" class="form-control" id="productname" name="brandname" placeholder="Brand name"
+                        <label for="productname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="productname" name="lname" placeholder="Enter last name"
                             required>
                     </div>
 
@@ -49,20 +55,27 @@
 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Colour</label>
-                        <input type="text" class="form-control" id="productname" name="color" placeholder="Enter colour"
+                        <label for="productname" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="productname" name="email" placeholder="Enter e-mail id"
                             required>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Category</label>
-                        <select name="category" id="category" style="width: 446px;height: 35px;" required>
-                            <option value="" selected disabled hidden>Choose Category</option>
-                            <% if(typeof(category) !='undefined') { %>
-                                <% category.forEach(function(cats) { %>
-                                    <option value="<%= cats._id %>"><%= cats.categoryname %></option>
-                                    <%})}%>
-                                                    
-                          </select>
+                        <label for="productname" class="form-label">Gender</label>
+                        <!-- <select name="category" id="category" style="width: 446px;height: 35px;">
+                            <option value="monitor">monitor</option>
+                            <option value="keyboard">keyboard</option>
+                            <option value="laptop">laptop</option>                        
+                          </select> -->
+                            <br>
+                            <div class="sac">
+                          <input type="radio" name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="gender" value="female"> Female
+                        </div>
+                              
+
+
+
+
                         <!-- <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               choose category
@@ -81,13 +94,13 @@
 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">price</label>
-                        <input type="number" class="form-control" id="price" name="price" placeholder="Enter the price"
+                        <label for="productname" class="form-label">Mobile</label>
+                        <input type="number" class="form-control" id="price" name="mobile" placeholder="Enter mobile number"
                             required>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity"
+                        <label for="productname" class="form-label">Zip Code</label>
+                        <input type="number" class="form-control" id="price" name="zipcode" placeholder="Enter the zipcode"
                         required>
                     </div>
 
@@ -96,30 +109,25 @@
 
                 <div class="row">
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Upload</label>
-                        <input class="form-control" type="file" id="productimage" name="image" required>
+                        <label for="productname" class="form-label">District</label>
+                        <input type="text" class="form-control" id="productname" name="district" placeholder="Enter the district"
+                            required>
                     </div>
                     <div class="mb-3 col-md-6">
-                        <label for="productname" class="form-label">Warranty</label>
-                        <input type="text" class="form-control" id="productname" name="warrenty" placeholder="Warrenty period in years"
+                        <label for="productname" class="form-label">State</label>
+                        <input type="text" class="form-control" id="productname" name="state" placeholder="enter the state"
                             required>
                     </div>
 
 
                 </div>
-                <div class="row">
-                    <div class="mb-3 col-md-12">
-                        <label for="productname" class="form-label">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
-                    </div>        
-                
-
-
-                </div>
+            
+                <br>
                 
             
                 <div class="mb-3">
-                    <input class="btn btn-primary" type="submit" value="Add Product">
+                    <input class="btn btn-primary" type="submit" value="Add Staff" style="margin-left: 41%;
+                    width: 160px;">
                 </div>
             </form>
 

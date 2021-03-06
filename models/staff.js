@@ -3,49 +3,46 @@ const mongoose = require('mongoose'); // Mongoose is used to access db.
 
 
 // Creating Schema. ie. fields that are used in db.
-const productSchema = mongoose.Schema({
-    productname: {
+const staffSchema = mongoose.Schema({
+    firstname: {
         type: String,
         required: true
     },
-    brandname: {
+    lastname: {
         type: String,
         require:false
     },
-    price: {
+    email: {
+        type: String,
+        required: true
+    },
+    mobile: {
         type: Number,
         required: true
     },
-    color: {
+    gender: {
         type: String,
         required: true
     },
-    quantity: {
+    zipcode: {
         type: Number,
         required: true
     },
-    category: {
+    district: {
         type: String,
         required: true
     },
-    image: {
+    state: {
         type: String,
         required: true
-    },
-    description: {
-        type: String,
-        required: false
-    },
-    warrenty: {
-        type: String
     }
 
 
 });
 
 // Exporting
-const ProductSchema = mongoose.model('Product', productSchema); // creating model using ProductSchema
-module.exports = { Product: ProductSchema} // Exporting ProductSchema
+const StaffSchema = mongoose.model('Staff', staffSchema); // creating model using StaffSchema
+module.exports = { Staff: StaffSchema} // Exporting StaffSchema
 
 
 
