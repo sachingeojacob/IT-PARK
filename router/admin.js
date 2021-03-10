@@ -4,7 +4,7 @@ const multer = require('multer');
 const { Category } = require('../models/category');
 const{ Product } = require('../models/product');
 const { Staff } = require('../models/staff');
-
+const { Users } = require('../models/register')
 
 
 // Configuring multer or middleware of multer.
@@ -47,13 +47,36 @@ router.get('/viewproduct', async (req, res)=>{
 
 //GET the category page in the admin
 router.get('/category', async (req, res)=>{
-    res.render('./admin/category')
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const categorys = await Category.find({}).sort({_id: -1});
+    res.render('./admin/category', {category: categorys})
 })
 
-//GET the category page in the admin
+//GET the addstaff page in the admin
 router.get('/addstaff', async (req, res)=>{
     res.render('./admin/addstaff')
 })
+
+//GET the view user page in the admin
+router.get('/viewuser', async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const users = await Users.find({}).sort({_id: -1});
+    res.render('admin/viewuser', {users: users}); // rendering admin/view user.ejs file
+})
+
+//GET the addstaff page in the admin
+router.get('/viewstaff', async (req, res)=>{
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const staffs = await Staff.find({}).sort({_id: -1});
+    res.render('./admin/viewstaff', {staff: staffs}); //rendering admin/view staff.ejs file
+})
+
 
 
 

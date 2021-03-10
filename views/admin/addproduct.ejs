@@ -55,7 +55,7 @@
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Category</label>
-                        <select name="category" id="category" style="width: 446px;height: 35px;" required>
+                        <select name="category" class="form-control" id="category" style="width: 453px;height: 35px;" required>
                             <option value="" selected disabled hidden>Choose Category</option>
                             <% if(typeof(category) !='undefined') { %>
                                 <% category.forEach(function(cats) { %>
@@ -97,7 +97,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Upload</label>
-                        <input class="form-control" type="file" id="productimage" name="image" required>
+                        <input class="form-control " type="file" id="productimage" name="image" required>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Warranty</label>

@@ -18,14 +18,15 @@
                     margin-left: 5em;
                     margin-top: 9em;
                     /* margin-right: 0em; */
-                    font-family: 'Rubik', sans-serif;
+                    font-family: fangso;
                 
                     width: fit-content;
-                    background-color: lightsteelblue;
-                    border-radius: 12px;
-                    
-                    
-                    
+                    background-color: rgb(110, 207, 162);
+                    border-radius: 12px;                             
+                }
+
+                .man{
+                    height: 19em;
                 }
             </style>
 
@@ -35,25 +36,50 @@
 
 
         <!-- main body code -->
-        <h1 align="center" style="font-weight: bold;">Add Category</h1>
+        <h1 align="center" style="font-weight: bold;">ADD CATEGORORY</h1>
 
       
         <div class="row">
             <form action="/admin/category" method="post"></form>
-            <div class="col-md-5 half">
-                <h1>ADD NEW CATEGORY</h1><br>
+            <div class="col-md-5 half man">
+                <h2 style="font-weight: bold;">ADD NEW CATEGORY</h2><br>
                 <form action="/admin/category" method="post">
-                <input type="text" name="category" placeholder="add category"><br><br>
-                <input type="submit" value="add category">
+                <input class="form-control" type="text" name="category" placeholder="add category"><br><br>
+                <input class="btn btn-primary" type="submit" value="add category">
            
 
             </div>
+            
 
           
        
     </form>
         <div class="col-md-5 half">
-            <h1>categories</h1><br>
+            <h2 style="font-weight: bold;">VIEW CATEGORIES</h2><br>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        
+    
+                        <tbody>
+                            <% if(typeof(category)!='undefined'){ %>
+                                <% category.forEach(function(category,id){%>
+                                    <tr>
+                                        <td><%= id+1 %></td>
+                                        <td><%= category.categoryname %></td>
+                                        <td align="center"><a href="" style="background-color: blue;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-edit"></i></i></a></td>
+                                        <td align="center"><a href="" style="background-color: red;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
+                                    </tr>
+
+                                <%})} %>
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
             
 
         </div>
