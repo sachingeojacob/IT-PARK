@@ -1,10 +1,13 @@
 // Importing necessary packages
 const router = require('express').Router(); // router handles each redirections.
+const {Product} = require('../models/product')
 
 
 // GET endpoint. showing index.ejs file.
 router.get('/', async (req, res) => {
-    res.render('customer/dashboard'); // rendering index.ejs file
+    const products = await Product.find({}).sort({_id: -1}); 
+    return res.render('customer/dashboard', {products:products});
+        // rendering index.ejs file
 })
 
 // logout
