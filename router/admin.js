@@ -5,6 +5,7 @@ const { Category } = require('../models/category');
 const{ Product } = require('../models/product');
 const { Staff } = require('../models/staff');
 const { Users } = require('../models/register')
+const fs = require('fs');
 
 
 // Configuring multer or middleware of multer.
@@ -42,7 +43,39 @@ router.get('/addproduct', async (req, res) => {
 
 //GET the viewproduct page in the admin
 router.get('/viewproduct', async (req, res)=>{
-    res.render('./admin/viewproduct')
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const products = await Product.find({}).sort({_id: -1});    
+    res.render('./admin/viewproduct', {products: products})
+})
+
+// GET endpoint. editing product.
+router.get('/updateproduct/:id', async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const products = await Product.findById({_id: req.params.id}).populate('category');
+    const categorys = await Category.find({}).sort({_id: -1});
+    res.render('admin/updateproduct', {product: products, category: categorys}); // rendering updateproduct page
+})
+
+
+//DELETE Endpoint
+router.get('/deleteproduct/:id', async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const oldData = await Product.findById({_id: req.params.id});
+    fs.unlink(`public/uploads/${oldData.image}`, async (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            const updatedData = await Product.findByIdAndDelete({_id: req.params.id});
+            return res.redirect('/admin/viewproduct');
+        }
+    })
+   
 })
 
 //GET the category page in the admin
@@ -127,6 +160,25 @@ router.post('/addproduct', uploadPhoto, async (req, res) => {
     res.redirect('/admin/addproduct'); // after saving. redirecting add product page
     //res.json( productdata )
 })
+
+
+
+// POST endpoint. updating product data to database.
+router.post('/updateproduct/:id', uploadPhoto, async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const oldData = await Product.findById({_id: req.params.id});
+    fs.unlink(`public/uploads/${oldData.image}`, async (err) => {
+        if(err) {
+            console.log(err);
+        } else {
+            const updatedData = await Product.findByIdAndUpdate({_id: req.params.id}, {productname: req.body.productname, brandname: req.body.brandname, price: req.body.price, color: req.body.color, quantity: req.body.quantity, description:req.body.description,warrenty:req.body.warrenty, category:req.body.category, image: req.file.filename});
+            return res.redirect('/admin/viewproduct'); // after updating. redirecting view product page
+        }
+    })
+})
+
 
 
 

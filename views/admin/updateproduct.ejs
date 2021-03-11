@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>update Product</title>
+        <link href="/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <style>
+            .sachin{
+                width: 90%;
+                height: 600px;
+                background: rgb(215, 215, 221);
+                padding: 1em;
+                margin-left: 5%;
+                color: rgb(110, 57, 57);
+                text-shadow:black
+                ;
+            }
+        </style>
+    </head>
+    <body>
+
+        <%- include('partials/navbar.ejs')  %>
+        
+
+        <!-- main content -->
+        <div class="sachin">
+            <h1 align="center" style="font-weight: bold;"> UPDATE PRODUCT</h1>
+            <form action="/admin/updateproduct/<%=product._id%>" method="post" class="col-md-10" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productname" name="productname" placeholder="Name" value="<%= product.productname %>"
+                            required>
+                    </div>
+                    
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Brand</label>
+                        <input type="text" class="form-control" id="productname" name="brandname" placeholder="Brand name" value="<%= product.brandname %>"
+                            required>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Colour</label>
+                        <input type="text" class="form-control" id="productname" name="color" placeholder="Enter colour" value="<%= product.color %>"
+                            required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Category</label>
+                        <select name="category" class="form-control" id="category" style="width: 453px;height: 35px;" required>
+                            <option value="" selected disabled hidden>Choose Category</option>
+                            <option value="<%= product.category._id %>" selected><%= product.category.categoryname %></option>
+                            <% if(typeof(category) !='undefined') { %>
+                                <% category.forEach(function(cats) { %>
+                                    <% if(product.category.categoryname != cats.categoryname) { %>
+                                    <option value="<%= cats._id %>"><%= cats.categoryname %></option>
+                                    <%}})}%>
+                                                    
+                          </select>
+                        <!-- <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              choose category
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Laptop</a>
+                              <a class="dropdown-item" href="#">mouse</a>
+                              <a class="dropdown-item" href="#">monitor</a>
+                            </div>
+                          </div> -->
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">price</label>
+                        <input type="number" class="form-control" id="price" name="price" placeholder="Enter the price" value="<%= product.price %>"
+                            required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Quantity" value="<%= product.quantity %>"
+                        required>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Upload</label>
+                        <input class="form-control " type="file" id="productimage" name="image" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label for="productname" class="form-label">Warranty</label>
+                        <input type="text" class="form-control" id="productname" name="warrenty" placeholder="Warrenty period in years" value="<%= product.warrenty %>"
+                            required>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-12">
+                        <label for="productname" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" required><%= product.description %></textarea>
+                    </div>        
+                
+
+
+                </div>
+                
+            
+                <div class="mb-3">
+                    <input class="btn btn-primary" type="submit" value="Update Product">
+                </div>
+            </form>
+
+
+
+
+
+
+
+
+
+        </div>
+        <!-- end of main content -->
+
+
+
+
+
+            <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    </body>
+</html>
