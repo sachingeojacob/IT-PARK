@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Customer | Dashboard</title>
+</head>
+
+<body>
+    <div class="center">
+        <% if(typeof(product) !='undefined' ) { %>
+            <div class="card mb-3" style="max-width: 100%; height: 90%;">
+                <div class="row g-0">
+                    <div class="col-md-4 mt-5">
+                        <img src="/uploads/<%=product.image%>" alt="image" style="object-fit: contain; width: 100%;">
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h1 class="card-title mt-5 fw-bold">
+                                <%= product.productname %>
+                            </h1>
+
+                            <h2>
+                                &#8377; <%=product.price %>
+                            </h2>
+                            <br>
+                            <% if(product.quantity==0 ) { %>
+                                <h5 class="error">Out of Stock</h5>
+                                <% } else { %>
+                                    <form action="/customer/addtocart/<%=product._id%>" method="POST" class=" col-md-3">
+                                        <label for="quantity">Quantity</label>
+                                        <input type="number" name="quantity" id="quanity" class="form-control"
+                                            max="<%= product.quantity %>" min="1" value="1">
+                                        <br>
+                                        <input type="submit" value="Add to cart" class="btn btn-primary">
+                                    </form>
+                                    <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+    </div>
+</body>
+
+</html>
