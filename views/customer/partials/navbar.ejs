@@ -2,13 +2,18 @@
 	<!-- Topbar -->
 
 	<!-- End Topbar -->
-	<div class="middle-inner">
+	<div class="middle-inner" style="background: beige; margin-bottom: -19px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-2 col-md-2 col-12">
+				<div class="col-lg-2 col-md-2 col-12" style=" margin-top: -38px;">
 					<!-- Logo -->
-					<div class="logo">
-						<a href="/"><img src="/customer/images/logo.png" alt="logo"></a>
+					<div class="logo p-2">
+						<% if(typeof(user) != 'undefined') { %> 
+							<a href="/customer/dashboard"><img src="/customer/images/logo.png" alt="logo"></a>
+						<% } else { %>
+							<a href="/"><img src="/customer/images/logo.png" alt="logo"></a>
+						<% } %>
+						<!-- <a href="/"><img src="/customer/images/logo.png" alt="logo"></a> -->
 					</div>
 					<!--/ End Logo -->
 					<!-- Search Form -->
@@ -24,7 +29,7 @@
 						
 					</div>
 				</div>
-				<div class="col-lg-2 col-md-3 col-12">
+				<div class="col-lg-2 col-md-3 col-12" style="margin-top: -25px;">
 					<div class="right-bar">
 						<!-- Search Form -->
 
@@ -34,7 +39,7 @@
 						<div class="sinlge-bar shopping">
 							<a href="/customer/cart" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
 							
-							<!-- Shopping Item -->
+							<!-- Shopping Item
 							<div class="shopping-item">
 								<div class="dropdown-cart-header">
 									<span>2 Items</span>
@@ -63,16 +68,16 @@
 								</div>
 								
 							</div>
-
+								
 							<!--/ End Shopping Item -->
-						</div>
+						
 						<div class="sinlge-bar">
 							
 							<ul class="list-main">
 								<% if(typeof(user) != 'undefined') { %> 
-									<a href="/logout" class="single-icon"><i class="ti-power-off" aria-hidden="true"></i></a>
+									<a href="/logout" class="single-icon">&nbsp;&nbsp;&nbsp;<i class="ti-power-off" aria-hidden="true"></i></a>
 								<% } else { %>
-									<a href="/login" class="single-icon"><i class="ti-user" aria-hidden="true"> Login</i></a>
+									<a href="/login" class="single-icon">&nbsp;&nbsp;&nbsp;<i class="ti-user" aria-hidden="true"> Login</i></a>
 								<% } %>
 								
 							</ul>
@@ -95,16 +100,26 @@
 								<div class="navbar-collapse">	
 									<div class="nav-inner">	
 										<ul class="nav main-menu menu navbar-nav">
-											<li class="active ml-5"><a href="/customer/dashboard">Home</a></li>
+											<% if(typeof(user) != 'undefined') { %> 
+												<li class="active ml-5"><a href="/customer/dashboard">Home</a></li>
+											<% } else { %>
+												<li class="active ml-5"><a href="/">Home</a></li>
+											<% } %>
+											<!-- <li class="active ml-5"><a href="/customer/dashboard">Home</a></li> -->
 											<li><a href="/customer/viewproduct">Product</a></li>												
 											
 											
 											
 											<li><a href="#">About US</a></li>									
 											
-											<li><a href="contact.html">Contact Us</a></li>
+											<li><a href="/customer/Contact">Contact Us</a></li>
 											<li><a href="/customer/orders">View Orders</a></li>
-											<li><a href="contact.html">Log in</a></li>
+											<% if(typeof(user) != 'undefined') { %> 
+												<li><a href="/logout">Log Out</a></li>
+											<% } else { %>
+												<li><a href="/login">Log in</a></li>
+											<% } %>
+											<!-- <li><a href="/login">Log in</a></li> -->
 										</ul>
 									</div>
 								</div>

@@ -6,6 +6,7 @@ const{ Product } = require('../models/product');
 const { Staff } = require('../models/staff');
 const { Users } = require('../models/register')
 const fs = require('fs');
+const { Contact } = require('../models/contact');
 
 
 // Configuring multer or middleware of multer.
@@ -110,6 +111,25 @@ router.get('/viewstaff', async (req, res)=>{
     res.render('./admin/viewstaff', {staff: staffs}); //rendering admin/view staff.ejs file
 })
 
+router.get('/complaints', async (req, res)=>{
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const contacts = await Contact.find({}).sort({_id: -1});
+    res.render('./admin/complaints', {contact: contacts}); //rendering admin/view staff.ejs file
+})
+
+//logout
+router.get('/logout', async (req, res) => {
+    if(req.session.userid) {
+        req.session.destroy((err) => {
+            if (err) {
+                return console.log(err);
+            }
+            res.redirect('/login');
+        });
+    } 
+})
 
 
 
@@ -196,6 +216,7 @@ router.post('/category', async (req, res) => {
     res.render('admin/dashboard'); // after saving. rendering caregory page
     //res.json( userdata )
 })
+
 
 
 

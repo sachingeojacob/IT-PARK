@@ -4,6 +4,7 @@ const {Users} = require('../models/register');
 const { Product } = require('../models/product');
 const { Cart } = require('../models/cart');
 const { Order, Address, Booking } = require('../models/booking');
+const { Contact } = require('../models/contact')
 
 
 // GET endpoint. showing index.ejs file.
@@ -129,6 +130,30 @@ router.get('/checkout', async (req, res) => {
     }
     const userData = await Users.findById({ _id: req.session.userid })
     res.render('customer/checkout', { info: userData.name })
+})
+
+// GET endpoint, go to contact us page
+router.get('/contact', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const userData = await Users.findById({ _id: req.session.userid })
+    res.render('customer/contact', { info: userData.name })
+})
+
+//post for contact page
+router.post('/contact', async (req, res) => {
+  
+    const contactdata = new Contact({    // adding data to Login model objects
+        name: req.body.name,
+        mobile: req.body.mobile,
+        email: req.body.email,
+        subject: req.body.subject,
+        message: req.body.message,
+        
+    });
+    await contactdata.save(); // saving data to databse
+    res.redirect('/customer/contact'); // after saving. redirecting contact page
 })
 
 
