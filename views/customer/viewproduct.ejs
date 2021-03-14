@@ -40,6 +40,16 @@
 
         <!-- main contents sweatshirts -->
 		<h1 align="center" style="margin-top:1em;font-weight: bold ;color: rgb(34, 80, 179);">Available Products</h1>
+		<div class="dropdown">
+			<button style="margin-left: 2em;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Choose Category
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			  <a class="dropdown-item" href="#">Action</a>
+			  <a class="dropdown-item" href="#">Another action</a>
+			  <a class="dropdown-item" href="#">Something else here</a>
+			</div>
+		  </div>
 		<div class="tab-content" id="myTabContent">
 
 	</div><div class="tab-pane fade show active" id="man" role="tabpanel">
@@ -62,7 +72,7 @@
 											</div>
 											<form action="/customer/addtocart/<%=product._id%>" method="POST">
 												<input type="hidden" name="quantity" id="" value="1">
-												<input type="submit" value="Add to cart" class="btn btn-primary">
+												<input type="submit" style="" value="Add to cart" class="btn btn-success">
 											</form>
 										</div>
 									</div>

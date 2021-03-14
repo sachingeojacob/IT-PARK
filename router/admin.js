@@ -131,6 +131,24 @@ router.get('/logout', async (req, res) => {
     } 
 })
 
+// GET endpoint. showing admin/outofstock.ejs file.
+router.get('/outofstock', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const outofstocks = await Product.find({ quantity: 0 }); // taking out of stock products, when quantity is zero.
+    res.render('admin/outofstock', { outofstocks: outofstocks }); // rendering admin/outofstock.ejs file
+})
+
+// POST endpoint. updating quantity.
+router.post('/updatequantity/:id', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const updatedData = await Product.findByIdAndUpdate({ _id: req.params.id }, { quantity: req.body.quantity });
+    res.redirect('/admin/outofstock'); // redirecting /admin/outofstock file
+})
+
 
 
 

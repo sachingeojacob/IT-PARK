@@ -48,6 +48,7 @@
 
 <body>
     <%- include ('partials/navbar.ejs') %>
+    <br><br><br><br>
         <div class="center-col">
             <% if(typeof(cart) !='undefined' ) { %>
                 <% if(cart.length==0 ) { %>
@@ -56,7 +57,7 @@
                     </div>
                     <% } else { %>
 
-                        <div style="position: absolute; top: 100px; width:90%;">
+                        <div style="position:relative;margin-top: -20em; top: 100px; width:90%;">
                             <% cart.forEach(function(cartitem) { %>
                                 <div class="row border border-2 mb-2">
                                     <div class="col-md-4">
@@ -98,7 +99,7 @@
                                                     <%= amount %> /-
                                                         <%}%>
                                             </h3>
-                                            <a href="/customer/checkout" class="btn btn-success">Proceed To Checkout</a>
+                                            <a href="/customer/checkout" style="color: aliceblue;background-color: green;" class="btn btn-success">Proceed To Checkout</a>
                                         </div>
                         </div>
                         <% } %>

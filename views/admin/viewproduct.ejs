@@ -16,11 +16,12 @@
     <%- include('partials/navbar.ejs') %>
 
     <!-- main content -->
-
+    
     <div class="center-col ml-5">
         <h1 align="center" style="font-weight: bold;color: rgb(69, 69, 230);">
             View Product
         </h1>
+
         <div class="row p-2">
             <% if(typeof(products) !='undefined' ) { %>
                 <% products.forEach(function(product) { %>
