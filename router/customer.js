@@ -14,6 +14,14 @@ router.get('/dashboard', async (req, res) => {
     res.render('./customer/dashboard', {user: userobj, products:products}); // rendering index.ejs file
 })
 
+//about page
+router.get('/about', async (req, res) => {
+    
+    return res.render('customer/about');
+        // rendering about file
+})
+
+
 // GET endpoint. showing viewproduct.ejs file.
 router.get('/viewproduct', async (req, res) => {
      try{

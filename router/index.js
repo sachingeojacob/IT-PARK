@@ -10,6 +10,8 @@ router.get('/', async (req, res) => {
         // rendering index.ejs file
 })
 
+
+
 // logout
 router.get('/logout', async (req,res) => {
     if(req.session.userid) {
