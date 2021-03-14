@@ -22,54 +22,69 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 font-weight-bold" align="center" style="color: rgb(41, 81, 194);">View Staff</h1><br>
+                    <h1 class="h3 mb-2 font-weight-bold" align="center" style="color: rgb(41, 81, 194);">Customer Query</h1><br>
                    
         
                     <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">View Registered Staff</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>SN</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Mobile</th>
-                                            <th>Subject</th>
-                                            <th>Message</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- <% if(typeof(staff)!='undefined'){ %>
-                                            <% staff.forEach(function(staff,id){%>
-                                                <tr>
-                                                    <td><%= id+1 %></td>
-                                                    <td><%= staff.firstname %></td>
-                                                    <td><%= staff.lastname %></td>
-                                                    <td><%= staff.email %></td>
-                                                    <td><%= staff.mobile %></td>
-                                                    <td align="center"><a href="" style="background-color: red;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
-                                                </tr>
-        
-                                            <%})} %> -->
+                    <div class="container">
                                         
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-        
-                </div> 
-        
-        
+                        <table class="table table-bordered" id="myTable">
+                          <thead>
+                            <tr>
+                                <th>SN</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th >Subject</th>
+                              <th>Message</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <% if(typeof(contact) !='undefined' ) { %>
+                           <% var i = 1; %>
+                            <% contact.forEach(function(contact) { %>
+                          <tbody>
+                            <tr> <td><%=i; %></td>
+                                <td ><%=contact.name %></td>
+                                <td ><%=contact.email %></td>
+                                <td><%=contact.subject %></td>
+                                <td><%=contact.message %></td>
+                                <td><button class="btn btn-outline-success" id="someButton"><a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target=”_blank”>
+                                    <b>RESPOND</b></a>
+                                  </button>&nbsp;&nbsp;&nbsp;
+                                  <a href="/admin/deletecomplaint/<%= contact._id %>">Delete</a>
+                                </td>
+                              </tr>
+                              <%  i++; }) %>
+                             
+                           
+                          </tbody>
+                        </table>
+                        <script>
+                            function myCreateFunction() {
+                              var table = document.getElementById("myTable");
+                              
+                            }
+                            
+                            function myDeleteFunction() {
+                              document.getElementById("myTable").deleteRow(1);
+                            }
+                            </script>
+                            
+                        <br> 
+      
+    
+                      </div> 
 
-
+                    
+                   
+                      
+                   
+                    
+                        <% } else { %>
+                            <h1>No more complaints to attend</h1>
+                            <% } %>
+        </div>
+    </div>
 
                 <!-- main content end here -->
 

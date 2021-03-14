@@ -7,6 +7,7 @@ const { Staff } = require('../models/staff');
 const { Users } = require('../models/register')
 const fs = require('fs');
 const { Contact } = require('../models/contact');
+const contact = require('../models/contact');
 
 
 // Configuring multer or middleware of multer.
@@ -130,6 +131,12 @@ router.get('/logout', async (req, res) => {
         });
     } 
 })
+
+router.get('/deletecomplaint/:id', async (req, res)=>{
+    const deletecomplaint = await Contact.findByIdAndRemove({_id:req.params.id})
+    res.redirect('/admin/complaints')
+})
+
 
 // GET endpoint. showing admin/outofstock.ejs file.
 router.get('/outofstock', async (req, res) => {

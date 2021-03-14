@@ -5,6 +5,8 @@ const { Product } = require('../models/product');
 const { Cart } = require('../models/cart');
 const { Order, Address, Booking } = require('../models/booking');
 const { Contact } = require('../models/contact')
+const stripe = require('stripe')('sk_test_51IUzDZEDgczo1vXELqjibV6XSAUaFYdU40NuBwL68NcEbUHW682OERQxaewfJpoyP4TZuH62vywBFgq5Td3SvnHz00IxpFKhEm')
+
 
 
 // GET endpoint. showing index.ejs file.
@@ -167,17 +169,44 @@ router.post('/contact', async (req, res) => {
 
 // POST endpoint. to store booking related data
 router.post('/checkout', async (req, res) => {
+    const cartDetails = await Cart.find({ loginID: req.session.userid }).populate('productid')
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items:cartDetails.map((items) => (
+            {
+                price_data: {
+                    currency: 'inr',
+                    product_data: {
+                        name: items.productid.productname,
+                        images: ['http://www.adventurewildlife.in/wp-content/uploads/2019/06/571962-plants-1.jpg'],
+                    },
+                    unit_amount: items.productid.price * 100,
+                },
+                quantity: items.quantity,
+            }
+        )),
+        mode: 'payment',
+        success_url: "http://localhost:3000/customer/success",
+        cancel_url: "http://localhost:3000/customer/cancel"
+    });
+    //oldcode
     var datetime = new Date();
     var date = datetime.getDate() + '/' + datetime.getMonth() + '/' + datetime.getFullYear();
     if (!req.session.userid) {
         return res.redirect('/login');
     }
-    const cartDetails = await Cart.find({ loginID: req.session.userid })
+    
     var totalamount = 0;
 
     cartDetails.map((data) => {
         totalamount += data.price
     })
+
+
+
+
+
+
 
     // saving order informartion
     const orderSave = new Order({
@@ -217,9 +246,21 @@ router.post('/checkout', async (req, res) => {
 
     // Removing items from cart
     const removeCart = await Cart.remove({ loginID: req.session.userid });
+    res.json({id: session.id});
 
-    //returning Home page
-    res.redirect('/')
+    
+})
+
+
+
+//succes route
+router.get('/success', async (req, res) => {
+    res.render('customer/success');
+})
+
+// error page
+router.get('/cancel', async (req, res) => {
+    res.render('customer/cancel');
 })
 
 
