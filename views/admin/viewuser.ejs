@@ -37,20 +37,20 @@
                             <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Username</th>
-                                    <th>Email </th>
-                                    <th>Contact</th>
-                                    <th>Action</th>
+                                    <th>FirstName</th>
+                                    <th>Username </th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Username</th>
-                                    <th>Email </th>
-                                    <th>Contact</th>
-                                    <th>Action</th>
+                                    <th>FirstName</th>
+                                    <th>Username </th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -59,11 +59,14 @@
                                     <% users.forEach(function(user,id){%>
                                         <tr>
                                             <td><%= id+1 %></td>
+                                            <td><%= user.fname %></td>
                                             <td><%= user.username %></td>
                                             <td><%= user.email %></td>
                                             <td><%= user.mobileno %></td>
-                                            <td>delete</td>
-                                            <td align="center"><a href="" style="background-color: red;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
+                                            <td><button class="btn btn-outline-success" id="someButton"><a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target=”_blank”>
+                                                <b>Connect</b></a>
+                                              </button></td>
+                                            
                                         </tr>
 
                                     <%})} %>

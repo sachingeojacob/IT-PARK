@@ -137,6 +137,41 @@ router.get('/deletecomplaint/:id', async (req, res)=>{
     res.redirect('/admin/complaints')
 })
 
+router.get('/deletecategory/:id', async (req, res)=>{
+    const deletecomplaint = await Category.findByIdAndRemove({_id:req.params.id})
+    res.redirect('/admin/category')
+})
+
+router.get('/deletestaff/:id', async (req, res)=>{
+    const deletestaff = await Staff.findByIdAndRemove({_id:req.params.id})
+    res.redirect('/admin/viewstaff')
+})
+
+
+// GET endpoint. editing product.
+router.get('/updatecategory/:id', async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const categorys = await Category.findById({_id: req.params.id});
+    const cate = await Category.find({}).sort({_id: -1});
+    
+    res.render('admin/category', {updatecategory: categorys, category:cate}); // rendering updatecategory page
+})
+
+// POST endpoint. updating category data to database.
+router.post('/updatecategory/:id', async (req, res) => {
+    
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const updatedData = await Category.findByIdAndUpdate({ _id: req.params.id }, { categoryname: req.body.category });
+    res.redirect('/admin/category'); // redirecting /admin/outofstock file
+})
+
+
+
+
 
 // GET endpoint. showing admin/outofstock.ejs file.
 router.get('/outofstock', async (req, res) => {

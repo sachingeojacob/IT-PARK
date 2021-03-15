@@ -40,13 +40,36 @@
 
       
         <div class="row">
-            <form action="/admin/category" method="post"></form>
+            
             <div class="col-md-5 half man">
-                <h2 style="font-weight: bold;">ADD NEW CATEGORY</h2><br>
-                <form action="/admin/category" method="post">
-                <input class="form-control" type="text" name="category" placeholder="add category"><br><br>
-                <input class="btn btn-primary" type="submit" value="add category">
-           
+                <h2 style="font-weight: bold;">
+                    <% if(typeof(updatecategory) != 'undefined') { %>
+                        UPDATE CATEGORY
+                        <% } else { %>
+                            ADD NEW CATEGORY
+                        <% } %> 
+                </h2><br>
+                <form action="
+                <% if(typeof(updatecategory) != 'undefined') { %>
+                    /admin/updatecategory/<%= updatecategory._id %>
+                    <% } else { %>
+                        /admin/category
+                    <% } %> 
+                " method="post">
+                
+                <% if(typeof(updatecategory) != 'undefined') { %>
+                    <input value="<%= updatecategory.categoryname %>" class="form-control" type="text" name="category" required><br><br>
+                    <% } else { %>
+                        <input value="" class="form-control" type="text" name="category" placeholder="add category" required><br><br>
+                        <% } %> 
+
+
+                <% if(typeof(updatecategory) != 'undefined') { %>
+
+                    <input class="btn btn-primary" type="submit" value="Update category">
+                    <% } else { %>
+                        <input class="btn btn-primary" type="submit" value="Add category">
+                    <% } %> 
 
             </div>
             
@@ -68,8 +91,8 @@
                                     <tr>
                                         <td><%= id+1 %></td>
                                         <td><%= category.categoryname %></td>
-                                        <td align="center"><a href="" style="background-color: blue;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-edit"></i></i></a></td>
-                                        <td align="center"><a href="" style="background-color: red;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
+                                        <td align="center"><a href="/admin/updatecategory/<%=category._id%>" style="background-color: blue;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-edit"></i></i></a></td>
+                                        <td align="center"><a href="/admin/deletecategory/<%=category._id%>" style="background-color: red;color: white;" class="btn btn-circle btn-sm"><i class="fas fa-trash"></i></a></td>
                                     </tr>
 
                                 <%})} %>

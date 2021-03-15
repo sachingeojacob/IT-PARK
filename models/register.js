@@ -4,6 +4,16 @@ const mongoose = require('mongoose'); // Mongoose is used to access db.
 
 // Creating Schema. ie. fields that are used in db.
 const userSchema = mongoose.Schema({
+    fname: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    lname: {
+        type: String,
+        unique: true,
+        required: true
+    },
     username: {
         type: String,
         unique: true,
@@ -13,14 +23,14 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    mobileno: {
+        type: Number,
+        required: true
+    },
     email: {
         type: String,
         required: true,
         unique: true
-    },
-    mobileno: {
-        type: Number,
-        required: true,
     },
 
     roleId: {

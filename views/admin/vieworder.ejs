@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+
+        <div class="row" id="bookings">
+            <!-- .col -->
+            <div class="col-md-12 col-lg-8 col-sm-12">
+                <div class="white-box">
+                    <h3 class="box-title">Recent Booking</h3>
+                    <div class="comment-center p-t-10">
+                       <!--  {% for boook in bookings %}
+-->                                <div class="comment-body">
+                            <div class="user-img"> <img src="/shoe/adminhome/plugins/images/users/pawandeep.jpg" alt="user" class="img-circle">
+                            </div>
+                            <div class="mail-contnet">
+                                <h5><!-- {{ boook.user_id.username }} --></h5><span class="time">STATUS : <!-- {{ boook.status }} --></span>
+                                <br/><span class="mail-desc">Total Pay: <!-- {{ boook.totalprice }} --></span>
+                                <ul>
+                                    <h2>ITEMS</h2>
+                                <!-- {% for bi in bookitems %}
+                                    {% if bi.booking_id_id == boook.id %}
+                                        <li>{{ bi.product_id.productname }}[{{ bi.product_id.size }}] - &#8377;{{ bi.product_id.price }}</li>
+                                    {% endif %}
+                                {% endfor %} -->
+                                </ul>
+
+                                <ul>
+                                    <h2>BILLING ADDRESS</h2>
+<!--                                         {% for bi in bookaddress %}
+                                    {% if bi.booking_id_id == boook.id %} -->
+                                        <li>House name: <!-- {{ bi.address }} --></li>
+                                        <li>State: <!-- {{ bi.state }} --></li>
+                                        <li>Country:<!--  {{ bi.country }} --></li>
+                                        <li>Email:<!--  {{ bi.email }} --></li>
+                                        <li>Pincode: <!-- {{ bi.pincode }} --></li>
+                                        <li>Phone: <!-- {{ bi.phone }} --></li>
+                                <!--     {% endif %}
+                                {% endfor %} -->
+                                </ul>
+                                <form method="post" action="<!-- {% url 'updatebookingstatus' %} -->">
+                                <select name="status" class="btn btn btn-rounded btn-default btn-outline m-r-5">
+                                    <option>Packing</option>
+                                    <option>Shipped</option>
+                                    <option>Delivered</option>
+                                </select>
+                                    <input type="hidden" name="bookid" value="{{ boook.id }}">
+                                <button type="submit" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="ti-check text-success m-r-5" style="color: #6bc755;"></i>CONFIRM</button>
+                                    </form>
+                            </div>
+                        </div>
+                   <!--      {% endfor %} -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- /.col -->
+        </div>
+   
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+
+
+</body>
+</html>

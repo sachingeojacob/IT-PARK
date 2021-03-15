@@ -21,17 +21,19 @@ router.get('/login', async (req, res)=> {
 router.post('/register', async (req, res) => {
     const usernamExists = await Users.findOne({username: req.body.username}); // finding whether the username exist or not.
     if(usernamExists) {
-        return res.render('register', {error: "Username already exists!"});
+        return res.render('login', {error: "Username already exists!"});
     }
     const userdata = new Users({    // adding data to Login model objects
+        fname: req.body.fname,
+        lname: req.body.lname,
         username: req.body.username,
+        mobile: req.body.mobile,
         password: req.body.password,
         email: req.body.email,
-        mobileno: req.body.mobileno,
         roleId: 2,
     });
     await userdata.save(); // saving data to databse
-    res.render('index'); // after saving. rendering login page
+    res.render('login'); // after saving. rendering login page
     //res.json( userdata )
 })
 

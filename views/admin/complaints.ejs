@@ -51,7 +51,7 @@
                                 <td><button class="btn btn-outline-success" id="someButton"><a href="https://mail.google.com/mail/u/0/#inbox?compose=new" target=”_blank”>
                                     <b>RESPOND</b></a>
                                   </button>&nbsp;&nbsp;&nbsp;
-                                  <a href="/admin/deletecomplaint/<%= contact._id %>">Delete</a>
+                                  <a href="/admin/deletecomplaint/<%= contact._id %>"><button class="btn btn-outline-danger">Delete</button></a>
                                 </td>
                               </tr>
                               <%  i++; }) %>
@@ -59,16 +59,14 @@
                            
                           </tbody>
                         </table>
-                        <script>
+                        <!-- <script>
                             function myCreateFunction() {
                               var table = document.getElementById("myTable");
                               
                             }
                             
-                            function myDeleteFunction() {
-                              document.getElementById("myTable").deleteRow(1);
-                            }
-                            </script>
+                    
+                            </script> -->
                             
                         <br> 
       
