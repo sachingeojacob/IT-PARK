@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Customer | Checkout</title>
+</head>
+
+<body>
+    <%- include ('partials/navbar.ejs') %>
+        <div class="center ">
+            <form class="row g-3 m-5">
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" value="<%= info %>" id="name" required
+                        placeholder="Enter name">
+                </div>
+                <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" value="" class="form-control" id="email" required placeholder="Enter email">
+                </div>
+                <div class="col-md-12">
+                    <label for="mobile" class="form-label">Mobile</label>
+                    <input type="number" name="mobile" value="" class="form-control" id="mobile" placeholder="Enter mobile no"
+                        required>
+                </div>
+                <div class="col-md-12">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" placeholder="Enter address" value="" class="form-control" required name="address"
+                        id="address">
+                </div>
+                <div class="col-md-12">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" value="" name="city" required placeholder="Enter city">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="zip" class="form-label">Pincode</label>
+                    <input type="number" value="" class="form-control" name="pincode" id="zip">
+                </div>
+                <div class="col-12">
+                    <button type="button" id="checkout-button" class="btn btn-primary">Proceed</button>
+                </div>
+            </form>
+        </div>
+
+        <br><br>
+        <footer class="footer">
+            <!-- Footer Top -->
+            <div class="footer-top section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer about">
+                                <div class="logo">
+                                    <a href="/customer/dashboard"><img src="/customer/images/logo2.png" alt="#"></a>
+                                </div>
+                                <p class="text">Check out the unique collection of Laptops, Desktops, and Computer Accessories on IT Park Digital Shop. From sleek, travel-friendly laptops to sturdy business laptops with superior performance, IT Park is the one-stop destination for all your needs.</p>
+                                <p class="call">Got Question? Call us 24/7<span><a href="tel:6161131110">6161131110</a></span></p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Information</h4>
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="/customer/contact">Contact Us</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Customer Service</h4>
+                                <ul>
+                                    <li><a href="#">Payment Methods</a></li>
+                                    <li><a href="#">Money-back</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer social">
+                                <h4>Get In Tuch</h4>
+                                <!-- Single Widget -->
+                                <div class="contact">
+                                    <ul>
+                                        <li>IT Park</li>
+                                        <li>Thruvalla</li>
+                                        <li>PATHANAMTHITTA</li>
+                                        <li>+9456823685</li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                                <ul>
+                                    <li><a href="https://www.facebook.com/"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#"><i class="ti-twitter"></i></a></li>
+                                    <li><a href="#"><i class="ti-flickr"></i></a></li>
+                                    <li><a href="#"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Footer Top -->
+            <div class="copyright">
+                <div class="container">
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="left">
+                                    <p>Copyright © 2021 <a href="http://www.wpthemesgrid.com" target="_blank">IT PARk</a>  -  All Rights Reserved.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="right">
+                                    <img src="/customer/images/payments.png" alt="#">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+        <script type="text/javascript">
+            // Create an instance of the Stripe object with your publishable API key
+            var stripe = Stripe("pk_test_51IUzDZEDgczo1vXE4Eh26CDfuiLwPOsWGJuqiOf5KIE6VpYq8d4TAGzUV3CeEADx11XPT8K0zX7s4UJjaN4pVuxM002PeXDe9a");
+            var checkoutButton = document.getElementById("checkout-button");
+            checkoutButton.addEventListener("click", function () {
+              fetch("/customer/checkout", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    mobile: document.getElementById("mobile").value,
+                    address: document.getElementById("address").value,
+                    city: document.getElementById("city").value,
+                    pincode: document.getElementById("zip").value,
+                }),
+              })
+                .then(function (response) {
+                  return response.json();
+                })
+                .then(function (session) {
+                  return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .then(function (result) {
+                  // If redirectToCheckout fails due to a browser or network
+                  // error, you should display the localized error message to your
+                  // customer using error.message.
+                  if (result.error) {
+                    alert(result.error.message);
+                  }
+                })
+                .catch(function (error) {
+                  console.error("Error:", error);
+                });
+            });
+          </script>
+</body>
+
+</html>

@@ -18,11 +18,14 @@ router.get('/dashboard', async (req, res) => {
 
 //about page
 router.get('/about', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const userData = await Users.findById({ _id: req.session.userid })
     
-    return res.render('customer/about');
+    return res.render('customer/about',{user: userData});
         // rendering about file
 })
-
 
 // GET endpoint. showing viewproduct.ejs file.
 router.get('/viewproduct', async (req, res) => {
@@ -56,7 +59,7 @@ router.get('/cart', async (req, res) => {
     totalPrice.map((obj) => {
         amount = amount + obj.price
     })
-    res.render('customer/cart', { cart: cartitems, amount: amount, user:userobj }); // rendering customer/cart.ejs file
+    res.render('customer/cartttt', { cart: cartitems, amount: amount, user:userobj }); // rendering customer/cart.ejs file
 })
 
 
@@ -84,7 +87,7 @@ router.post('/updateqty/:id', async (req, res) => {
 
 
 //POST Endpoint, Remove from cart
-router.post('/deleteproduct/:id', async (req, res) => {
+router.get('/deleteproduct/:id', async (req, res) => {
     if (!req.session.userid) {
         return res.redirect('/')
     }
@@ -97,9 +100,45 @@ router.post('/deleteproduct/:id', async (req, res) => {
 
 // GET endpoint. showing product details page.
 router.get('/detail/:id', async (req, res) => {
+    if(!req.session.userid) {
+        return res.redirect('/login')
+    }
+    const userobj = await Users.findById({_id: req.session.userid})
     const product = await Product.findById({ _id: req.params.id })
-    res.render('customer/details', { product: product }); // rendering customer/details.ejs file
+    res.render('customer/details', {user: userobj, product: product }); // rendering customer/details.ejs file
 })
+
+
+router.get('/addtocart/:id', async (req, res) => {
+    // if the user is not logi then it should redirect to /login
+    if (!req.session.userid) {
+        return res.redirect('/login')
+    }
+    // otherwise obtain the details of that partcular product id
+    const prodDetails = await Product.findById({ _id: req.params.id });
+    // chekc whether the product is in cart or not. if it is in cart return with an error
+    try {
+        const prodincart = await Cart.findOne({ productid: req.params.id, loginID: req.session.userid});
+        if (prodincart) {
+            return res.redirect('/customer/dashboard')
+        }
+    } catch (err) {
+        return res.redirect('/customer/dashboard')
+    }
+    // otherwise save the items to the cart
+    const productSave = new Cart({
+        productid: req.params.id,
+        loginID: req.session.userid,
+        quantity: Number(req.body.quantity) || 1,
+        price: prodDetails.price * Number(req.body.quantity)
+    })
+    await productSave.save();
+    // removing quantity from the Product model
+    const getProduct = await Product.findById({ _id: req.params.id });
+    const productUpdate = await Product.findByIdAndUpdate({ _id: req.params.id }, { quantity: getProduct.quantity - productSave.quantity })
+    res.redirect('/customer/dashboard')
+})
+
 
 // POSt endpoint. addtocart
 router.post('/addtocart/:id', async (req, res) => {
@@ -138,8 +177,13 @@ router.get('/checkout', async (req, res) => {
     if (!req.session.userid) {
         return res.redirect('/login');
     }
+    const cartDetails =await Cart.find({loginID: req.session.userid});
+    let amount = 0;
+    cartDetails.map((items) => {
+        amount = amount + items.price
+    })
     const userData = await Users.findById({ _id: req.session.userid })
-    res.render('customer/checkout', { info: userData.name })
+    res.render('customer/checkout', { user: userData, amount: amount })
 })
 
 // GET endpoint, go to contact us page
@@ -148,7 +192,7 @@ router.get('/contact', async (req, res) => {
         return res.redirect('/login');
     }
     const userData = await Users.findById({ _id: req.session.userid })
-    res.render('customer/contact', { info: userData.name })
+    res.render('customer/contact', { info: userData.name, user: userData })
 })
 
 //post for contact page
@@ -269,8 +313,14 @@ router.get('/orders', async (req, res) => {
     if (!req.session.userid) {
         return res.redirect('/login');
     }
+    const userData = await Users.findById({ _id: req.session.userid})
     const orderData = await Order.find({ loginID: req.session.userid }).sort({ _id: '-1' })
-    res.render('customer/vieworder', { order: orderData })
+    res.render('customer/vieworder', {user:userData, order: orderData })
+})
+
+router.get('/details/:id', async (req, res) => {
+    const product = await Product.findById({ _id: req.params.id })
+    res.render('customer/details', { product: product }); // rendering customer/details.ejs file
 })
 
 // Get endpoint, view detailed order

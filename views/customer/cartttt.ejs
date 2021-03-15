@@ -39,119 +39,192 @@
 
 
         <!-- main content starts here -->
+        <!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<!-- Shopping Summery -->
+					
+					<% if(typeof(cart) != 'undefined') { %>
+						<% if(cart.length == 0) { %>
 
-        <div class="breadcrumbs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="bread-inner">
-                            <ul class="bread-list">
-                                <li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-                                <li class="active"><a href="blog-single.html">Cart</a></li>
-                            </ul>
+							<div style="display: flex; align-items: center; justify-content: center;">
+								<h1>There is no product in cart</h1>
+							</div>
+						<% } else { %>
+						<table class="table shopping-summery">
+							<thead>
+								<tr class="main-hading">
+									<th>PRODUCT</th>
+									<th>NAME</th>
+									<th class="text-center">QUANTITY</th>
+									<th class="text-center">TOTAL</th> 
+									<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% cart.forEach(function(items) { %>
+									<tr>
+										<td class="image" data-title="No"><img src="/uploads/<%= items.productid.image %>" alt="#"></td>
+										<td class="product-des" data-title="Description">
+											<p class="product-name"><a href="#"><%= items.productid.productname %></a></p>
+											<p class="product-des"><%= items.productid.description %></p>
+										</td>
+										<td class="qty" data-title="Qty"><!-- Input Order -->
+											<div class="col-md-4">
+												<form action="/customer/updateqty/<%=items._id %>" method="POST"
+													class="mb-3">
+													<label for="quantity">Quantity</label>
+													<input class="form-control mb-2" type="number" name="quantity" id="quantity"
+														max="<%= items.productid.quantity %>" min="1"
+														value="<%=items.quantity %>">
+													<input type="submit" value="Update Quantity" class="btn btn-primary">
+												</form>
+											</div>
+											<!--/ End Input Order -->
+										</td>
+										<td class="total-amount" data-title="Total"><span><%= items.price %></span></td>
+										<td class="action" data-title="Remove"><a href="/customer/deleteproduct/<%=items._id %>"><i class="ti-trash remove-icon"></i></a></td>
+									</tr>
+								<% }) %>
+								
+							</tbody>
+						</table>
+
+					<% }} %>
+					<!--/ End Shopping Summery -->
+				</div>
+			</div>
+				<% if(typeof(amount) != 'undefined' || typeof(cart) != 'undefined') { %>
+					<% if(cart.length != 0) { %>
+					<div class="row">
+						<div class="col-12">
+							<!-- Total Amount -->
+							<div class="total-amount">
+								<div class="row">
+									<div class="col-lg-8 col-md-5 col-12">
+										
+									</div>
+									<div class="col-lg-4 col-md-7 col-12">
+										<div class="right">
+											<ul>
+												<li>Cart Subtotal<span><%= amount %></span></li>
+												<li>Shipping<span>Free</span></li>
+												
+												<li class="last">You Pay<span><%= amount %></span></li>
+											</ul>
+											<div class="button5">
+												<a href="/customer/checkout" class="btn">Checkout</a>
+												<a href="/customer/dashboard" class="btn">Continue shopping</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/ End Total Amount -->
+						</div>
+					</div>
+				<%}} %>
+		</div>
+	</div>
+
+        <!-- main content ends here -->
+        <br><br>
+        <footer class="footer">
+            <!-- Footer Top -->
+            <div class="footer-top section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer about">
+                                <div class="logo">
+                                    <a href="/customer/dashboard"><img src="/customer/images/logo2.png" alt="#"></a>
+                                </div>
+                                <p class="text">Check out the unique collection of Laptops, Desktops, and Computer Accessories on IT Park Digital Shop. From sleek, travel-friendly laptops to sturdy business laptops with superior performance, IT Park is the one-stop destination for all your needs.</p>
+                                <p class="call">Got Question? Call us 24/7<span><a href="tel:6161131110">6161131110</a></span></p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Information</h4>
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="/customer/contact">Contact Us</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Customer Service</h4>
+                                <ul>
+                                    <li><a href="#">Payment Methods</a></li>
+                                    <li><a href="#">Money-back</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer social">
+                                <h4>Get In Tuch</h4>
+                                <!-- Single Widget -->
+                                <div class="contact">
+                                    <ul>
+                                        <li>IT Park</li>
+                                        <li>Thruvalla</li>
+                                        <li>PATHANAMTHITTA</li>
+                                        <li>+9456823685</li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                                <ul>
+                                    <li><a href="https://www.facebook.com/"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#"><i class="ti-twitter"></i></a></li>
+                                    <li><a href="#"><i class="ti-flickr"></i></a></li>
+                                    <li><a href="#"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-<!-- Shopping Cart -->
-
-<div class="shopping-cart section">
-    <% if(typeof(cart) !='undefined' ) { %>
-        <% if(cart.length==0 ) { %>
-            <div class="center">
-                <h1>There is no item in the cart</h1>
-            </div>
-            <% } else { %>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <!-- Shopping Summery -->
-                <table class="table shopping-summery">
-                    <thead>
-                        <tr class="main-hading">
-                            <th>PRODUCT</th>
-                            <th>NAME</th>
-                            <th class="text-center">UNIT PRICE</th>
-                            <th class="text-center">QUANTITY</th>
-                            <th class="text-center">TOTAL</th> 
-                            <th class="text-center"><i class="ti-trash remove-icon"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <% cart.forEach(function(cartitem) { %>
-                            <td class="image" data-title="No"><img src="/uploads/<%= cartitem.productid.image %>" alt="image"></td>
-                            <td class="product-des" data-title="Description">
-                                <p class="product-name"><a href="#"><%= cartitem.productid.productname %></a></p>
-                                <p class="product-des"><%= cartitem.productid.brandname %></p>
-                            </td>
-                            <td class="price" data-title="Price"><span>RS. <%= cartitem.price %> </span></td>
-                            <td class="qty" data-title="Qty"><!-- Input Order -->
-                                <div class="input-group">
-                                    <div class="button minus">
-                                        <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                            <i class="ti-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="<%= cartitem.quantity %>">
-                                    <div class="button plus">
-                                        <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-                                            <i class="ti-plus"></i>
-                                        </button>
-                                    </div>
+            <!-- End Footer Top -->
+            <div class="copyright">
+                <div class="container">
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="left">
+                                    <p>Copyright © 2021 <a href="http://www.wpthemesgrid.com" target="_blank">IT PARk</a>  -  All Rights Reserved.</p>
                                 </div>
-                                <!--/ End Input Order -->
-                            </td>
-                            <td class="total-amount" data-title="Total"><span>$220.88</span></td>
-                            <td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-                <!--/ End Shopping Summery -->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <!-- Total Amount -->
-                <div class="total-amount">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-5 col-12">
-                            
-                        </div>
-                        <div class="col-lg-4 col-md-7 col-12">
-                            <div class="right">
-                                <ul>
-                                    <li>Cart Subtotal<span>RS.  <% if(typeof(amount) !='undefined' ) { %>
-                                        <%= amount %> /-
-                                            <%}%></span></li>
-                                    <li>Shipping<span>Free</span></li>
-                                    
-                                    <li class="last">You Pay<span>RS.  <% if(typeof(amount) !='undefined' ) { %>
-                                        <%= amount %> /-
-                                            <%}%></span></li>
-                                </ul>
-                                <div class="button5">
-                                    <a href="/customer/checkout" class="btn">Checkout</a>
-                                    <a href="/customer/dashboard" class="btn">Continue shopping</a>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="right">
+                                    <img src="/customer/images/payments.png" alt="#">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--/ End Total Amount -->
             </div>
-        </div>
-       
-    </div>
-    <% } %>
-    <% } %>
-</div>
-    
+        </footer>
 
-        <!-- main content ends here -->
+
+
+
 
 
         

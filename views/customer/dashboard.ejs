@@ -10,7 +10,7 @@
 	<!-- Title Tag  -->
     <title>IT PARK</title>
 	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/customer/images/favicon.png">
+	<!-- <link rel="icon" type="image/png" href="/customer/images/favicon.png"> -->
 	<!-- Web Font -->
 	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 	
@@ -74,11 +74,11 @@
 						<div class="text-inner">
 							<div class="row">
 								<div class="col-lg-7 col-12">
-									<div class="hero-text">
-										<h1><span>UP TO 50% OFF </span>Shirt For Man</h1>
-										<p>Maboriosam in a nesciung eget magnae <br> dapibus disting tloctio in the find it pereri <br> odiy maboriosm.</p>
+									<div class="hero-text" style="margin-left: -20em;">
+										<h1><span></span>IT PARK</h1>
+										<p>A complete digital shop for<br> All your computer accessories</p>
 										<div class="button">
-											<a href="#" class="btn">Shop Now!</a>
+											<a href="/customer/viewproduct" class="btn">Shop Now!</a>
 										</div>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="section-title">
-							<h2>Trending Item</h2>
+							<h2>Trending Products</h2>
 						</div>
 					</div>
 				</div>
@@ -109,12 +109,12 @@
 							<div class="nav-main">
 								<!-- Tab Nav -->
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
-									<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#man" role="tab">Man</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#women" role="tab">Woman</a></li>
+									<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#" role="tab" hidden>Man</a></li>
+									<!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#women" role="tab">Woman</a></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#kids" role="tab">Kids</a></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#accessories" role="tab">Accessories</a></li>
 									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#essential" role="tab">Essential</a></li>
-									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#prices" role="tab">Prices</a></li>
+									<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#prices" role="tab">Prices</a></li> -->
 								</ul>
 								<!--/ End Tab Nav -->
 							</div>
@@ -139,7 +139,10 @@
 																		
 																	</div>
 																	<div class="product-action-2">
-																		<a title="Add to cart" href="#">Add to cart</a>
+																		<form action="/customer/addtocart/<%=product._id%>" method="POST">
+																			<input type="hidden" name="quantity" id="" value="1">
+																			<input type="submit"  value="Add to cart" class="btn btn-success">
+																		</form>
 																	</div>
 																</div>
 															</div>
@@ -177,7 +180,7 @@
 																<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 															</div>
 															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
+																
 															</div>
 														</div>
 													</div>
@@ -1268,68 +1271,6 @@
 	<!-- End Product Area -->
 	
 	<!-- Start Midium Banner  -->
-	<section class="midium-banner">
-		<div class="container">
-			<div class="row">
-				<!-- Single Banner  -->
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="single-banner">
-						<img src="https://via.placeholder.com/600x370" alt="#">
-						<div class="content">
-							<p>Man's Collectons</p>
-							<h3>Man's items <br>Up to<span> 50%</span></h3>
-							<a href="#">Shop Now</a>
-						</div>
-					</div>
-				</div>
-				<!-- /End Single Banner  -->
-				<!-- Single Banner  -->
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="single-banner">
-						<img src="https://via.placeholder.com/600x370" alt="#">
-						<div class="content">
-							<p>shoes women</p>
-							<h3>mid season <br> up to <span>70%</span></h3>
-							<a href="#" class="btn">Shop Now</a>
-						</div>
-					</div>
-				</div>
-				<!-- /End Single Banner  -->
-			</div>
-		</div>
-	</section>
-	<!-- End Midium Banner -->
-	
-	
-	<!-- Start Cowndown Area -->
-
-    <br><br>
-	<section class="cown-down">
-		<div class="section-inner ">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-lg-6 col-12 padding-right">
-						<div class="image">
-							<img src="https://via.placeholder.com/750x590" alt="#">
-						</div>	
-					</div>	
-					<div class="col-lg-6 col-12 padding-left">
-						<div class="content">
-							<div class="heading-block">
-								<p class="small-title">Deal of day</p>
-								<h3 class="title">Beatutyful dress for women</h3>
-								<p class="text">Suspendisse massa leo, vestibulum cursus nulla sit amet, frungilla placerat lorem. Cars fermentum, sapien. </p>
-								<h1 class="price">$1200 <s>$1890</s></h1>
-								<div class="coming-time">
-									<div class="clearfix" data-countdown="2021/02/30"></div>
-								</div>
-							</div>
-						</div>	
-					</div>	
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- /End Cowndown Area -->
 	
 	<br><br><br>
@@ -1379,27 +1320,7 @@
 	<!-- End Shop Services Area -->
 	
 	<!-- Start Shop Newsletter  -->
-	<section class="shop-newsletter section">
-		<div class="container">
-			<div class="inner-top">
-				<div class="row">
-					<div class="col-lg-8 offset-lg-2 col-12">
-						<!-- Start Newsletter Inner -->
-						<div class="inner">
-							<h4>Newsletter</h4>
-							<p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
-							<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-								<input name="EMAIL" placeholder="Your email address" required="" type="email">
-								<button class="btn">Subscribe</button>
-							</form>
-						</div>
-						<!-- End Newsletter Inner -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- End Shop Newsletter -->
+		<!-- End Shop Newsletter -->
 	
 	<!-- Modal  ithannnnnnnnn-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
@@ -1513,7 +1434,7 @@
             </div>
     </div>
     <!-- Modal end -->
-	
+	<br><br>
 	<!-- Start Footer Area -->
 	<footer class="footer">
 		<!-- Footer Top -->
@@ -1524,10 +1445,10 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="/customer/images/logo2.png" alt="#"></a>
+								<a href="/customer/dashboard"><img src="/customer/images/logo2.png" alt="#"></a>
 							</div>
-							<p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
-							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
+							<p class="text">Check out the unique collection of Laptops, Desktops, and Computer Accessories on IT Park Digital Shop. From sleek, travel-friendly laptops to sturdy business laptops with superior performance, IT Park is the one-stop destination for all your needs.</p>
+							<p class="call">Got Question? Call us 24/7<span><a href="tel:6161131110">6161131110</a></span></p>
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -1539,7 +1460,7 @@
 								<li><a href="#">About Us</a></li>
 								<li><a href="#">Faq</a></li>
 								<li><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">Contact Us</a></li>
+								<li><a href="/customer/contact">Contact Us</a></li>
 								<li><a href="#">Help</a></li>
 							</ul>
 						</div>
@@ -1566,15 +1487,15 @@
 							<!-- Single Widget -->
 							<div class="contact">
 								<ul>
-									<li>NO. 342 - London Oxford Street.</li>
-									<li>012 United Kingdom.</li>
-									<li>info@eshop.com</li>
-									<li>+032 3456 7890</li>
+									<li>IT Park</li>
+									<li>Thruvalla</li>
+									<li>PATHANAMTHITTA</li>
+									<li>+9456823685</li>
 								</ul>
 							</div>
 							<!-- End Single Widget -->
 							<ul>
-								<li><a href="#"><i class="ti-facebook"></i></a></li>
+								<li><a href="https://www.facebook.com/"><i class="ti-facebook"></i></a></li>
 								<li><a href="#"><i class="ti-twitter"></i></a></li>
 								<li><a href="#"><i class="ti-flickr"></i></a></li>
 								<li><a href="#"><i class="ti-instagram"></i></a></li>
@@ -1592,7 +1513,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © 2020 <a href="http://www.wpthemesgrid.com" target="_blank">Wpthemesgrid</a>  -  All Rights Reserved.</p>
+								<p>Copyright © 2021 <a href="http://www.wpthemesgrid.com" target="_blank">IT PARk</a>  -  All Rights Reserved.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">

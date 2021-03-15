@@ -4,7 +4,8 @@ const multer = require('multer');
 const { Category } = require('../models/category');
 const{ Product } = require('../models/product');
 const { Staff } = require('../models/staff');
-const { Users } = require('../models/register')
+const { Users } = require('../models/register');
+const { Order, Address, Booking } = require('../models/booking');
 const fs = require('fs');
 const { Contact } = require('../models/contact');
 const contact = require('../models/contact');
@@ -94,6 +95,25 @@ router.get('/addstaff', async (req, res)=>{
     res.render('./admin/addstaff')
 })
 
+
+router.get('/orders', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const userData = await Users.findById({ _id: req.session.userid})
+    const orderData = await Order.find({  }).sort({ _id: '-1' })
+    res.render('admin/vieworder', {user:userData, order: orderData })
+})
+
+router.get('/orders/:id', async (req, res) => {
+    if (!req.session.userid) {
+        return res.redirect('/login');
+    }
+    const productData = await Booking.find({ orderid: req.params.id }).populate('orderid productid addressid')
+    res.render('admin/detailedview', { orderdata: productData })
+})
+
+
 //GET the view user page in the admin
 router.get('/viewuser', async (req, res) => {
     if(!req.session.userid) {
@@ -146,6 +166,8 @@ router.get('/deletestaff/:id', async (req, res)=>{
     const deletestaff = await Staff.findByIdAndRemove({_id:req.params.id})
     res.redirect('/admin/viewstaff')
 })
+
+
 
 
 // GET endpoint. editing product.
