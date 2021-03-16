@@ -46,6 +46,11 @@
 					</div>
 					
 					<button >Register Now</button>
+					<small class="error">
+						<% if(typeof(error) !='undefined' ) { %>
+							<%= error %>
+								<% } %>
+					</small>
 				</form>
 			</div>
 		</div>

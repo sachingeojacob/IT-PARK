@@ -40,13 +40,13 @@
                 <div class="row padd">
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="productname" name="fname" placeholder="Enter first Name"
+                        <input type="text" pattern="[A-Za-z]{2,}"  title="Invalid Name" class="form-control" id="productname" name="fname" placeholder="Enter first Name"
                             required>
                     </div>
                     
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="productname" name="lname" placeholder="Enter last name"
+                        <input type="text" pattern="[A-Za-z]{1,}"  title="Invalid Name" class="form-control" id="productname" name="lname" placeholder="Enter last name"
                             required>
                     </div>
 
@@ -68,8 +68,8 @@
                           </select> -->
                             <br>
                             <div class="sac">
-                          <input type="radio" name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="gender" value="female"> Female
+                          <input type="radio" name="gender" value="male" required> Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="gender" value="female" required> Female
                         </div>
                               
 
@@ -95,12 +95,12 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Mobile</label>
-                        <input type="number" class="form-control" id="price" name="mobile" placeholder="Enter mobile number"
+                        <input type="text" pattern="[0-9]{10}" title="Enter a Valid Mobile Number" class="form-control" id="price" name="mobile" placeholder="Enter mobile number"
                             required>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">Zip Code</label>
-                        <input type="number" class="form-control" id="price" name="zipcode" placeholder="Enter the zipcode"
+                        <input type="text" pattern="[0-9]{6}" title="Enter a valid zipcode" class="form-control" id="price" name="zipcode" placeholder="Enter the zipcode"
                         required>
                     </div>
 
@@ -110,12 +110,12 @@
                 <div class="row">
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">District</label>
-                        <input type="text" class="form-control" id="productname" name="district" placeholder="Enter the district"
+                        <input type="text" pattern="[A-Za-z]{2,}"  title="Invalid District" class="form-control" id="productname" name="district" placeholder="Enter the district"
                             required>
                     </div>
                     <div class="mb-3 col-md-6">
                         <label for="productname" class="form-label">State</label>
-                        <input type="text" class="form-control" id="productname" name="state" placeholder="enter the state"
+                        <input type="text" pattern="[A-Za-z]{2,}"  title="Invalid State" class="form-control" id="productname" name="state" placeholder="enter the state"
                             required>
                     </div>
 
@@ -132,7 +132,7 @@
             </form>
 
 
-
+            
 
 
 
@@ -140,6 +140,14 @@
 
 
         </div>
+        <footer class="sticky-footer bg-white ">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy;IT Park 2020</span>
+                </div>
+            </div>
+        </footer>
+        
         <!-- end of main content -->
 
 

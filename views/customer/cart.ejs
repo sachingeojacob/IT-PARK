@@ -1,112 +1,234 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+    <head>
+        <title>Cart</title>
+        <link rel="icon" type="image/png" href="/customer/images/favicon.png">
+        <!-- Web Font -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+        
+        <!-- StyleSheet -->
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/customer/css/bootstrap.css">
+        <!-- Magnific Popup -->
+        <link rel="stylesheet" href="/customer/css/magnific-popup.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/customer/css/font-awesome.css">
+        <!-- Fancybox -->
+        <link rel="stylesheet" href="/customer/css/jquery.fancybox.min.css">
+        <!-- Themify Icons -->
+        <link rel="stylesheet" href="/customer/css/themify-icons.css">
+        <!-- Nice Select CSS -->
+        <link rel="stylesheet" href="/customer/css/niceselect.css">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="/customer/css/animate.css">
+        <!-- Flex Slider CSS -->
+        <link rel="stylesheet" href="/customer/css/flex-slider.min.css">
+        <!-- Owl Carousel -->
+        <link rel="stylesheet" href="/customer/css/owl-carousel.css">
+        <!-- Slicknav -->
+        <link rel="stylesheet" href="/customer/css/slicknav.min.css">
+        
+        <!-- Eshop StyleSheet -->
+        <link rel="stylesheet" href="/customer/css/reset.css">
+        <link rel="stylesheet" href="/customer/css/style.css">
+        <link rel="stylesheet" href="/customer/css/responsive.css">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/styles.css">
-    <title>Customer Cart</title>
-    	<!-- Favicon -->
-	<link rel="icon" type="image/png" href="/customer/images/favicon.png">
-	<!-- Web Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-	
-	<!-- StyleSheet -->
-	
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="/customer/css/bootstrap.css">
-	<!-- Magnific Popup -->
-    <link rel="stylesheet" href="/customer/css/magnific-popup.min.css">
-	<!-- Font Awesome -->
-    <link rel="stylesheet" href="/customer/css/font-awesome.css">
-	<!-- Fancybox -->
-	<link rel="stylesheet" href="/customer/css/jquery.fancybox.min.css">
-	<!-- Themify Icons -->
-    <link rel="stylesheet" href="/customer/css/themify-icons.css">
-	<!-- Nice Select CSS -->
-    <link rel="stylesheet" href="/customer/css/niceselect.css">
-	<!-- Animate CSS -->
-    <link rel="stylesheet" href="/customer/css/animate.css">
-	<!-- Flex Slider CSS -->
-    <link rel="stylesheet" href="/customer/css/flex-slider.min.css">
-	<!-- Owl Carousel -->
-    <link rel="stylesheet" href="/customer/css/owl-carousel.css">
-	<!-- Slicknav -->
-    <link rel="stylesheet" href="/customer/css/slicknav.min.css">
-	
-	<!-- Eshop StyleSheet -->
-	<link rel="stylesheet" href="/customer/css/reset.css">
-	<link rel="stylesheet" href="/customer/css/style.css">
-    <link rel="stylesheet" href="/customer/css/responsive.css">
-</head>
+    </head>
+    <body>
+        <%- include('partials/navbar.ejs') %>
 
-<body>
-    <%- include ('partials/navbar.ejs') %>
-    <br><br><br><br>
-        <div class="center-col">
-            <% if(typeof(cart) !='undefined' ) { %>
-                <% if(cart.length==0 ) { %>
-                    <div class="center">
-                        <h1>There is no item in the cart</h1>
-                    </div>
-                    <% } else { %>
 
-                        <div style="position:relative;margin-top: -20em; top: 100px; width:90%;">
-                            <% cart.forEach(function(cartitem) { %>
-                                <div class="row border border-2 mb-2">
-                                    <div class="col-md-4">
-                                        <img src="/uploads/<%= cartitem.productid.image %>" alt="image"
-                                            style="width: 200px; object-fit: contain;">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h1 class="fw-bold">
-                                            <%= cartitem.productid.productname %>
-                                        </h1>
-                                        <h3 class="fw-bold">
-                                            &#8377; <%= cartitem.price %>
-                                        </h3>
-                                        <h6 class="text-secondary">
-                                            <%= cartitem.quantity %> qty
-                                        </h6>
-                                    </div>
-                                    <di class="col-md-4">
-                                        <form action="/customer/updateqty/<%=cartitem._id %>" method="POST"
-                                            class="mb-3">
-                                            <label for="quantity">Quantity</label>
-                                            <input class="form-control mb-2" type="number" name="quantity" id="quantity"
-                                                max="<%= cartitem.productid.quantity %>" min="1"
-                                                value="<%=cartitem.quantity %>">
-                                            <input type="submit" value="Update Quantity" class="btn btn-primary">
-                                        </form>
-                                        <form action="/customer/deleteproduct/<%=cartitem._id %>" method="POST">
-                                            <input type="hidden" name="hidden">
-                                            <input type="submit" value="Remove from cart" class="btn btn-danger">
-                                        </form>
-                                    </di>
+        <!-- main content starts here -->
+        <!-- Shopping Cart -->
+	<div class="shopping-cart section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<!-- Shopping Summery -->
+					
+					<% if(typeof(cart) != 'undefined') { %>
+						<% if(cart.length == 0) { %>
+
+							<div style="display: flex; align-items: center; justify-content: center;">
+								<h1>There is no product in cart</h1>
+							</div>
+						<% } else { %>
+						<table class="table shopping-summery">
+							<thead>
+								<tr class="main-hading">
+									<th>PRODUCT</th>
+									<th>NAME</th>
+									<th class="text-center">QUANTITY</th>
+									<th class="text-center">TOTAL</th> 
+									<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% cart.forEach(function(items) { %>
+									<tr>
+										<td class="image" data-title="No"><img src="/uploads/<%= items.productid.image %>" alt="#"></td>
+										<td class="product-des" data-title="Description">
+											<p class="product-name"><a href="#"><%= items.productid.productname %></a></p>
+											<p class="product-des"><%= items.productid.description %></p>
+										</td>
+										<td class="qty" data-title="Qty"><!-- Input Order -->
+											<div class="col-md-4">
+												<form action="/customer/updateqty/<%=items._id %>" method="POST"
+													class="mb-3">
+													<label for="quantity">Quantity</label>
+													<input class="form-control mb-2" type="number" name="quantity" id="quantity"
+														max="<%= items.productid.quantity %>" min="1"
+														value="<%=items.quantity %>">
+													<input type="submit" value="Update Quantity" class="btn btn-primary">
+												</form>
+											</div>
+											<!--/ End Input Order -->
+										</td>
+										<td class="total-amount" data-title="Total"><span><%= items.price %></span></td>
+										<td class="action" data-title="Remove"><a href="/customer/deleteproduct/<%=items._id %>"><i class="ti-trash remove-icon"></i></a></td>
+									</tr>
+								<% }) %>
+								
+							</tbody>
+						</table>
+
+					<% }} %>
+					<!--/ End Shopping Summery -->
+				</div>
+			</div>
+				<% if(typeof(amount) != 'undefined' || typeof(cart) != 'undefined') { %>
+					<% if(cart.length != 0) { %>
+					<div class="row">
+						<div class="col-12">
+							<!-- Total Amount -->
+							<div class="total-amount">
+								<div class="row">
+									<div class="col-lg-8 col-md-5 col-12">
+										
+									</div>
+									<div class="col-lg-4 col-md-7 col-12">
+										<div class="right">
+											<ul>
+												<li>Cart Subtotal<span><%= amount %></span></li>
+												<li>Shipping<span>Free</span></li>
+												
+												<li class="last">You Pay<span><%= amount %></span></li>
+											</ul>
+											<div class="button5">
+												<a href="/customer/checkout" class="btn">Checkout</a>
+												<a href="/customer/dashboard" class="btn">Continue shopping</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/ End Total Amount -->
+						</div>
+					</div>
+				<%}} %>
+		</div>
+	</div>
+
+        <!-- main content ends here -->
+        <br><br>
+        <footer class="footer">
+            <!-- Footer Top -->
+            <div class="footer-top section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer about">
+                                <div class="logo">
+                                    <a href="/customer/dashboard"><img src="/customer/images/logo2.png" alt="#"></a>
                                 </div>
-                                <% }) %>
-                                    <dic class="row">
-                                        <div class="col-md-5">
-                                            <h3 class="fw-bold">Total Price:</h3>
-                                            <h3 class="fw-bold"> &#8377;
-                                                <% if(typeof(amount) !='undefined' ) { %>
-                                                    <%= amount %> /-
-                                                        <%}%>
-                                            </h3>
-                                            <a href="/customer/checkout" style="color: aliceblue;background-color: green;" class="btn btn-success">Proceed To Checkout</a>
-                                        </div>
+                                <p class="text">Check out the unique collection of Laptops, Desktops, and Computer Accessories on IT Park Digital Shop. From sleek, travel-friendly laptops to sturdy business laptops with superior performance, IT Park is the one-stop destination for all your needs.</p>
+                                <p class="call">Got Question? Call us 24/7<span><a href="tel:6161131110">6161131110</a></span></p>
+                            </div>
+                            <!-- End Single Widget -->
                         </div>
-                        <% } %>
-        </div>
-        <% } %>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Information</h4>
+                                <ul>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="/customer/contact">Contact Us</a></li>
+                                    <li><a href="#">Help</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer links">
+                                <h4>Customer Service</h4>
+                                <ul>
+                                    <li><a href="#">Payment Methods</a></li>
+                                    <li><a href="#">Money-back</a></li>
+                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="#">Shipping</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer social">
+                                <h4>Get In Tuch</h4>
+                                <!-- Single Widget -->
+                                <div class="contact">
+                                    <ul>
+                                        <li>IT Park</li>
+                                        <li>Thruvalla</li>
+                                        <li>PATHANAMTHITTA</li>
+                                        <li>+9456823685</li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                                <ul>
+                                    <li><a href="https://www.facebook.com/"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#"><i class="ti-twitter"></i></a></li>
+                                    <li><a href="#"><i class="ti-flickr"></i></a></li>
+                                    <li><a href="#"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            	<!-- Jquery -->
+            <!-- End Footer Top -->
+            <div class="copyright">
+                <div class="container">
+                    <div class="inner">
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="left">
+                                    <p>Copyright © 2021 <a href="http://www.wpthemesgrid.com" target="_blank">IT PARk</a>  -  All Rights Reserved.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="right">
+                                    <img src="/customer/images/payments.png" alt="#">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+        
+     <!-- Jquery -->
     <script src="/customer/js/jquery.min.js"></script>
     <script src="/customer/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/customer/js/jquery-ui.min.js"></script>
@@ -138,6 +260,5 @@
 	<script src="/customer/js/easing.js"></script>
 	<!-- Active JS -->
 	<script src="/customer/js/active.js"></script>
-</body>
-
+    </body>
 </html>

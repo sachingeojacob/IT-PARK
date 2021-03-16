@@ -21,7 +21,7 @@ router.get('/login', async (req, res)=> {
 router.post('/register', async (req, res) => {
     const usernamExists = await Users.findOne({username: req.body.username}); // finding whether the username exist or not.
     if(usernamExists) {
-        return res.render('login', {error: "Username already exists!"});
+        return res.render('register', {error: "Username already exists!"});
     }
     const userdata = new Users({    // adding data to Login model objects
         fname: req.body.fname,
@@ -51,10 +51,10 @@ router.post('/login', async (req, res) => {
                 res.redirect('/customer/dashboard');
             }
         } else {
-            res.render('login', {error: "Incorrect Password!"});
+             res.render('login', {error: "Incorrect username or Password!"});
         }
     } else {
-        res.render('login', {error: "incorrect Username!"});
+         res.render('login', {error: "Incorrect Username or Password!"});
     }
     res.render('login'); // rendering login page
 })

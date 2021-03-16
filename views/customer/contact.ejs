@@ -83,13 +83,13 @@
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Your Name<span>*</span></label>
-												<input name="name" type="text" placeholder="">
+												<input name="name" pattern="[A-Za-z]{2,}" title="Invalid Name" type="text" placeholder="">
 											</div>
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Your Subjects<span>*</span></label>
-												<input name="subject" type="text" placeholder="">
+												<input name="subject" pattern="[A-Za-z]{2,}"  title="Enter a Valid subject"  type="text" placeholder="">
 											</div>
 										</div>
 										<div class="col-lg-6 col-12">
@@ -101,13 +101,13 @@
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Your Phone<span>*</span></label>
-												<input name="mobile" type="text" placeholder="">
+												<input name="mobile" type="text" pattern="[0-9]{10}" title="Enter a Valid Mobile Number" placeholder="">
 											</div>	
 										</div>
 										<div class="col-12">
 											<div class="form-group message">
 												<label>your message<span>*</span></label>
-												<textarea name="message" placeholder=""></textarea>
+												<textarea name="message"  placeholder=""></textarea>
 											</div>
 										</div>
 										<div class="col-12">

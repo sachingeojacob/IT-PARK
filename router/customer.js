@@ -59,7 +59,7 @@ router.get('/cart', async (req, res) => {
     totalPrice.map((obj) => {
         amount = amount + obj.price
     })
-    res.render('customer/cartttt', { cart: cartitems, amount: amount, user:userobj }); // rendering customer/cart.ejs file
+    res.render('customer/cart', { cart: cartitems, amount: amount, user:userobj }); // rendering customer/cart.ejs file
 })
 
 
